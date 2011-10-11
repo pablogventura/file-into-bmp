@@ -99,9 +99,9 @@ void read_file_in_bmp(bmp_file me, char * path){
 
 void write (pixel me, unsigned char value){
 	
-	unsigned char t1 = value & 0b00000111; 
-	unsigned char t2 = (value & 0b00111000)>>3; 
-	unsigned char t3 = (value & 0b11000000)>>6; 
+	unsigned char t1 = value & 0x07; /*0x07 = 0b00000111*/
+	unsigned char t2 = (value & 0x38)>>3; /*0x38 = 0b00111000*/
+	unsigned char t3 = (value & 0xC0)>>6; /*0xC0= 0b11000000*/
 	
 	set_red_pixel(me, generate_remainder(red_pixel(me), 8, t1));
 	set_green_pixel(me, generate_remainder(green_pixel(me), 8, t2));
@@ -111,9 +111,9 @@ void write (pixel me, unsigned char value){
 unsigned char read(pixel me){
 	unsigned char result = 0;
 		
-	unsigned char t1 = (red_pixel(me) % 8) & 0b00000111; 
-	unsigned char t2 = (((green_pixel(me) % 8)<<3) & 0b00111000); 
-	unsigned char t3 = (((blue_pixel(me) % 4)<<6) & 0b11000000); 
+	unsigned char t1 = (red_pixel(me) % 8) & 0x07; /*0x07 = 0b00000111*/
+	unsigned char t2 = (((green_pixel(me) % 8)<<3) & 0x38); /*0x38 = 0b00111000*/
+	unsigned char t3 = (((blue_pixel(me) % 4)<<6) & 0xC0); /*0xC0= 0b11000000*/
 	
 	result = t1 | t2 | t3;
 	
