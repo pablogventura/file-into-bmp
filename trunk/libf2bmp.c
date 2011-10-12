@@ -72,6 +72,40 @@ void read_file_in_bmp(char * bmp_path, char * path){
 
 }
 
+void read_file_in_bmp_to_stdout(char * bmp_path){
+
+
+	FILE * to_file;
+	bmp_file bmp;
+	unsigned char * buffer;
+	unsigned int i = 4;
+	unsigned int j = 0;
+	unsigned char c_size[4];
+	int32_t * size = (int32_t *) &c_size[0];
+	
+	bmp = open_bmp(bmp_path);
+	to_file = stdout;
+	
+	c_size[0] = read(get_i_pixel(bmp, 0));
+	c_size[1] = read(get_i_pixel(bmp, 1));
+	c_size[2] = read(get_i_pixel(bmp, 2));
+	c_size[3] = read(get_i_pixel(bmp, 3));
+	
+	buffer = calloc (*size, sizeof (unsigned char));
+	
+	while (j<*size){
+		buffer[j] = read (get_i_pixel(bmp, i));
+		j++;
+		i++;
+	}
+	fwrite(buffer, sizeof (unsigned char), *size, to_file);
+
+
+	
+	bmp = close_bmp(bmp);
+
+}
+
 void write (pixel me, unsigned char value){
 	
 	unsigned char t1 = value & 0x07; /*0x07 = 0b00000111*/

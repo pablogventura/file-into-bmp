@@ -14,4 +14,6 @@ unsigned char generate_remainder(unsigned char number, unsigned char divisor, un
 
 void read_file_in_bmp(char * bmp_path, char * path);
 
+void read_file_in_bmp_to_stdout(char * bmp_path);
+
 void write_file_in_bmp(char * bmp_path, char * path, char * new_bmp_path);
