@@ -1,5 +1,5 @@
 /*
-This source file is part of f2bmp.  This code was
+This source file is part of file2bmp.  This code was
 written by Pablo Ventura in 2011, and is covered by the GPL.
  */
 
